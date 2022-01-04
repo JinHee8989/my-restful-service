@@ -8,4 +8,5 @@ import lombok.Data;
 public class HelloWorldBean {
     private String message;
 
+
 }
