@@ -2,4 +2,8 @@ server:
   port: 8088
 
 logging:
-  level: debug
+  org:
+    springframework:
+      boot:
+        logging:
+          LogLevel: debug
