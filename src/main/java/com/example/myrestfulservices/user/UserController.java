@@ -6,6 +6,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -39,4 +40,25 @@ public class UserController {
 
         return ResponseEntity.created(location).build();    //status에 [201 created]로 오고 headers의 location에 [http://localhost:8088/users/4]이런 형식으로 오게 됨
     }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id){
+        User user = service.deleteById(id);
+
+        if(user == null){
+            throw new UserNotFoundException(String.format("ID[%s] not fount",id));
+        }
+    }
+
+    @PutMapping("/users/{id}")
+    public void modifyUser(@PathVariable int id, @RequestBody Map<String,String> userInfo){
+        System.out.println("id = " + id);
+        System.out.println("name = " + userInfo);
+        User user = service.modifyById(id, userInfo.get("name"));
+
+        if(user == null){
+            throw new UserNotFoundException(String.format("ID[%s] not fount",id));
+        }
+    }
+
 }
