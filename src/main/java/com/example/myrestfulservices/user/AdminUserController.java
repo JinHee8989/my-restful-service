@@ -46,6 +46,7 @@ public class AdminUserController {
 
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name","password","ssn");
 
+
         FilterProvider filters = new SimpleFilterProvider().addFilter("userInfo",filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
 
 
