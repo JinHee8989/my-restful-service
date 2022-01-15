@@ -19,17 +19,17 @@ import java.util.Map;
 public class AdminUserController {
     private UserDaoService service;
 
-    public AdminUserController(UserDaoService service){ //생성자를 이용한 의존성 주입
+    public AdminUserController(UserDaoService service) { //생성자를 이용한 의존성 주입
         this.service = service;
     }
 
     @GetMapping("/users")
-    public MappingJacksonValue retrieveAllUsers(){
+    public MappingJacksonValue retrieveAllUsers() {
 
-        List<User> users =  service.findAll();
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name","password","ssn");
+        List<User> users = service.findAll();
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "password", "ssn");
 
-        FilterProvider filters = new SimpleFilterProvider().addFilter("userInfo",filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
+        FilterProvider filters = new SimpleFilterProvider().addFilter("userInfo", filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
 
         MappingJacksonValue mapping = new MappingJacksonValue(users);
         mapping.setFilters(filters);
@@ -39,16 +39,17 @@ public class AdminUserController {
 
     //    @GetMapping("/v1/users/{id}") //uri를 이용한 api 버전관리 방법
 //    @GetMapping(value = "/users/{id}", params = "version=1") //request parameter를 이용한 api 버전관리 방법
-    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1") //header를 이용한 api 버전관리 방법
-    public MappingJacksonValue retrieveUserV1(@PathVariable int id){
+//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1") //header를 이용한 api 버전관리 방법
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json") //header produces MIME을 이용한 api 버전관리 방법
+    public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
-        if(user == null){
-            throw new UserNotFoundException(String.format("ID[%s] not fount",id));
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not fount", id));
         }
 
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name","password","ssn");
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "password", "ssn");
 
-        FilterProvider filters = new SimpleFilterProvider().addFilter("userInfo",filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
+        FilterProvider filters = new SimpleFilterProvider().addFilter("userInfo", filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
 
         MappingJacksonValue mapping = new MappingJacksonValue(user);
         mapping.setFilters(filters);
@@ -57,22 +58,22 @@ public class AdminUserController {
     }
 
 
-//    @GetMapping("/v2/users/{id}")
+    //    @GetMapping("/v2/users/{id}")
     @GetMapping(value = "/users/{id}", params = "version=2")
-    public MappingJacksonValue retrieveUserV2(@PathVariable int id){
+    public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
         User user = service.findOne(id);
-        if(user == null){
-            throw new UserNotFoundException(String.format("ID[%s] not fount",id));
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not fount", id));
         }
 
         //user -> user2
         UserV2 userV2 = new UserV2();
-        BeanUtils.copyProperties(user,userV2);
+        BeanUtils.copyProperties(user, userV2);
         userV2.setGrade("VIP");
 
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name","password","grade");
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "password", "grade");
 
-        FilterProvider filters = new SimpleFilterProvider().addFilter("userInfoV2",filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
+        FilterProvider filters = new SimpleFilterProvider().addFilter("userInfoV2", filter); //어떤 빈을 대상으로 필터를 적용시킬지 정해줘야
 
         MappingJacksonValue mapping = new MappingJacksonValue(user);
         mapping.setFilters(filters);
