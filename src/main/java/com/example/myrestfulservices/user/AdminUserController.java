@@ -37,10 +37,10 @@ public class AdminUserController {
         return mapping;
     }
 
-    //    @GetMapping("/v1/users/{id}") //uri를 이용한 api 버전관리 방법
-//    @GetMapping(value = "/users/{id}", params = "version=1") //request parameter를 이용한 api 버전관리 방법
-//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1") //header를 이용한 api 버전관리 방법
-    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json") //header produces MIME을 이용한 api 버전관리 방법
+    //    @GetMapping("/v1/users/{id}") //uri를 이용한 api 버전관리 방법 (일반 브라우저에서 실행가능)
+//    @GetMapping(value = "/users/{id}", params = "version=1") //request parameter를 이용한 api 버전관리 방법 (일반 브라우저에서 실행가능)
+//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1") //header를 이용한 api 버전관리 방법 (일반 브라우저에서 실행 불가)
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json") //header produces MIME을 이용한 api 버전관리 방법(일반 브라우저에서 실행 불가)
     public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
         if (user == null) {
