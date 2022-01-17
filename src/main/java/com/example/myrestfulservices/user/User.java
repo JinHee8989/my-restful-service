@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 //@JsonIgnoreProperties(value = {"password","ssn"}) //명명한 필드만 보여지지 않도록 함
-@JsonFilter("userInfo")
+//@JsonFilter("userInfo")
 public class User {
     private Integer id;
 

@@ -11,6 +11,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
@@ -34,11 +35,12 @@ public class UserController {
         }
 
         //HATEOAS
-        EntityModel<User> model = new EntityModel<>(user);
-        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()))
+        EntityModel<User> model = EntityModel.of(user);
+        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+        model.add(linkTo.withRel("all-users"));
 
 
-        return user;
+        return model;
     }
 
     @PostMapping("/users")
