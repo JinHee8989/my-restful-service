@@ -34,6 +34,7 @@ public class UserController {
             throw new UserNotFoundException(String.format("ID[%s] not fount",id));
         }
 
+
         //HATEOAS
         EntityModel<User> model = EntityModel.of(user);
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
