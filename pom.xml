@@ -78,6 +78,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId> <!-- http://localhost:8088/actuator 에서 서버 상태 확인 가능 -->
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

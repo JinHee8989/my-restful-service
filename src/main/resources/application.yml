@@ -11,3 +11,11 @@ logging:
 spring:
   messages:
     basename: messages
+
+
+# 서버 모니터링 기능 추가
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
