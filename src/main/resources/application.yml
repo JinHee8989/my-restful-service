@@ -8,6 +8,7 @@ logging:
         logging:
           LogLevel: debug
 
+
 spring:
   messages:
     basename: messages
