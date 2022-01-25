@@ -26,6 +26,7 @@ import java.util.Date;
 @Entity
 public class User {
 
+
     @Id
     @GeneratedValue
     private Integer id;
