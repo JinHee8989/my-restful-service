@@ -12,10 +12,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -46,4 +48,17 @@ public class User {
     //    @JsonIgnore
     @ApiModelProperty(notes = "사용자 주민번호를 입력해주세요.")
     private String ssn;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+
+    public User(int id, String name, Date date, String pwd, String ssn) {
+
+        this.id = id;
+        this.name = name;
+        this.joinDate = date;
+        this.password = pwd;
+        this.ssn = ssn;
+    }
 }
