@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+
     @Bean
     public Docket api(){            //http://localhost:포트번호/swagger-ui.html, http://localhost:포트번호/v2/api-docs 에서 api document 확인 가능
         return new Docket(DocumentationType.SWAGGER_2);
