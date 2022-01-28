@@ -78,6 +78,28 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId> <!-- http://localhost:8088/actuator 에서 서버 상태 확인 가능 -->
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency> <!-- REST browser의 값을 json형식으로 HATEOAS를 사용할 수 있다는 장점이 있음-->
+            <groupId>org.springframework.data</groupId> <!--http://localhost:8088/browser/index.html#/를 이용해 확인 가능-->
+            <artifactId>spring-data-rest-hal-browser</artifactId>
+            <version>3.3.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>

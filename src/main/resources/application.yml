@@ -11,3 +11,20 @@ logging:
 spring:
   messages:
     basename: messages
+#  security:
+#    user:
+#      name: username
+#      password: passw0rd
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+# 서버 모니터링 기능 추가
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+
