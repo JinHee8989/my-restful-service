@@ -74,6 +74,7 @@ public class UserJpaController {
         return user.get().getPosts();
     }
 
+
     @PostMapping("/users/{id}/posts")
     public ResponseEntity<Post> createPost(@PathVariable int id, @RequestBody Post post){
 
